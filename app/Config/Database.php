@@ -51,6 +51,23 @@ class Database extends Config
         ],
     ];
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $host = getenv('DB_HOST') ?: getenv('database.default.hostname') ?: ($_ENV['database.default.hostname'] ?? ($_ENV['DB_HOST'] ?? null));
+        $user = getenv('DB_USER') ?: getenv('database.default.username') ?: ($_ENV['database.default.username'] ?? ($_ENV['DB_USER'] ?? null));
+        $pass = getenv('DB_PASS') ?: getenv('database.default.password') ?: ($_ENV['database.default.password'] ?? ($_ENV['DB_PASS'] ?? null));
+        $name = getenv('DB_NAME') ?: getenv('database.default.database') ?: ($_ENV['database.default.database'] ?? ($_ENV['DB_NAME'] ?? null));
+        $port = getenv('DB_PORT') ?: getenv('database.default.port') ?: ($_ENV['database.default.port'] ?? ($_ENV['DB_PORT'] ?? null));
+
+        if ($host) $this->default['hostname'] = $host;
+        if ($user) $this->default['username'] = $user;
+        if ($pass !== null) $this->default['password'] = $pass;
+        if ($name) $this->default['database'] = $name;
+        if ($port) $this->default['port'] = (int)$port;
+    }
+
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
