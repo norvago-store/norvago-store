@@ -26,7 +26,11 @@ if (isset($_SERVER['REQUEST_URI']) && str_starts_with($_SERVER['REQUEST_URI'], '
     
     $mysqli = mysqli_init();
     mysqli_ssl_set($mysqli, NULL, NULL, NULL, NULL, NULL);
-    $conn = @mysqli_real_connect($mysqli, $host, $user, $pass, $name, $port, NULL, MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT);
+    $flags = MYSQLI_CLIENT_SSL;
+    if (defined('MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT')) {
+        $flags |= MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
+    }
+    $conn = @mysqli_real_connect($mysqli, $host, $user, $pass, $name, $port, NULL, $flags);
     
     if (!$conn) {
         echo json_encode([
