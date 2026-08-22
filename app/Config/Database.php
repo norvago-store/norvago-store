@@ -66,6 +66,13 @@ class Database extends Config
         if ($pass !== null) $this->default['password'] = $pass;
         if ($name) $this->default['database'] = $name;
         if ($port) $this->default['port'] = (int)$port;
+
+        // Auto-enable SSL for TiDB Cloud and remote MySQL servers
+        if ($host && !in_array($host, ['localhost', '127.0.0.1', '::1'])) {
+            $this->default['encrypt'] = [
+                'ssl_verify' => false,
+            ];
+        }
     }
 
     //    /**
