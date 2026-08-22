@@ -30,8 +30,8 @@ $routes->get('/logout', 'Member\Auth::logout');
 $routes->get('/member/dashboard', 'Member\Dashboard::index');
 
 // Self-Hosted QRIS / Bank Mutation Webhook Automation
-$routes->post('/api/webhook/qris-mutation', 'Api\Webhook::qrisMutation');
-$routes->get('/api/webhook/qris-mutation', 'Api\Webhook::qrisMutation');
+$routes->match(['get', 'post'], 'api/webhook/qris-mutation', 'Api\Webhook::qrisMutation');
+$routes->match(['get', 'post'], 'webhook/qris-mutation', 'Api\Webhook::qrisMutation');
 
 // Admin Auth
 $routes->get('/admin/login', 'Admin\Auth::login');

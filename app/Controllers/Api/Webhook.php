@@ -48,9 +48,9 @@ class Webhook extends BaseController
         }
 
         // 2. Extract Amount and Description
-        $amount = (float) ($json['amount'] ?? $json['nominal'] ?? $json['credit'] ?? $this->request->getPost('amount') ?? 0);
-        $description = (string) ($json['description'] ?? $json['keterangan'] ?? $json['pesan'] ?? $this->request->getPost('description') ?? '');
-        $source = (string) ($json['source'] ?? $json['bank'] ?? 'webhook');
+        $amount = (float) ($json['amount'] ?? $json['nominal'] ?? $json['credit'] ?? $this->request->getPost('amount') ?? $this->request->getGet('amount') ?? $this->request->getGet('nominal') ?? 0);
+        $description = (string) ($json['description'] ?? $json['keterangan'] ?? $json['pesan'] ?? $this->request->getPost('description') ?? $this->request->getGet('description') ?? '');
+        $source = (string) ($json['source'] ?? $json['bank'] ?? $this->request->getGet('source') ?? 'webhook');
 
         // Regex fallback if amount is in raw text (e.g. from notification text "Dana masuk Rp 20.148")
         if ($amount <= 0 && !empty($rawBody)) {
