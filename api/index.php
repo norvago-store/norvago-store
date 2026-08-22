@@ -18,9 +18,9 @@ if (!is_dir($writablePath)) {
 // Support DB Connection Test endpoint
 if (isset($_SERVER['REQUEST_URI']) && str_starts_with($_SERVER['REQUEST_URI'], '/test-db')) {
     header('Content-Type: application/json');
-    $host = getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? 'not set');
-    $user = getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? 'not set');
-    $pass = getenv('DB_PASS') ?: ($_ENV['DB_PASS'] ?? 'not set');
+    $host = getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com');
+    $user = getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? '19eqYAw2mJLEdo2.root');
+    $pass = getenv('DB_PASS') ?: ($_ENV['DB_PASS'] ?? 'norvastore45');
     $name = getenv('DB_NAME') ?: ($_ENV['DB_NAME'] ?? 'test');
     $port = (int)(getenv('DB_PORT') ?: ($_ENV['DB_PORT'] ?? 4000));
     
