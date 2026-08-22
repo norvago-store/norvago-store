@@ -55,6 +55,10 @@ class Database extends Config
     {
         parent::__construct();
 
+        if (ENVIRONMENT === 'testing') {
+            $this->defaultGroup = 'tests';
+        }
+
         $host = getenv('DB_HOST') ?: getenv('database.default.hostname') ?: ($_ENV['database.default.hostname'] ?? ($_ENV['DB_HOST'] ?? null));
         $user = getenv('DB_USER') ?: getenv('database.default.username') ?: ($_ENV['database.default.username'] ?? ($_ENV['DB_USER'] ?? null));
         $pass = getenv('DB_PASS') ?: getenv('database.default.password') ?: ($_ENV['database.default.password'] ?? ($_ENV['DB_PASS'] ?? null));
@@ -213,16 +217,4 @@ class Database extends Config
             'time'     => 'H:i:s',
         ],
     ];
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        // Ensure that we always set the database group to 'tests' if
-        // we are currently running an automated test suite, so that
-        // we don't overwrite live data on accident.
-        if (ENVIRONMENT === 'testing') {
-            $this->defaultGroup = 'tests';
-        }
-    }
 }
