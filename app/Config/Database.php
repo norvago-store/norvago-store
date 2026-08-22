@@ -61,7 +61,7 @@ class Database extends Config
 
         $host = getenv('DB_HOST') ?: getenv('database.default.hostname') ?: ($_ENV['database.default.hostname'] ?? ($_ENV['DB_HOST'] ?? 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com'));
         $user = getenv('DB_USER') ?: getenv('database.default.username') ?: ($_ENV['database.default.username'] ?? ($_ENV['DB_USER'] ?? '19eqYAw2mJLEdo2.root'));
-        $pass = getenv('DB_PASS') ?: getenv('database.default.password') ?: ($_ENV['database.default.password'] ?? ($_ENV['DB_PASS'] ?? 'norvastore45'));
+        $pass = getenv('DB_PASS') ?: getenv('database.default.password') ?: ($_ENV['database.default.password'] ?? ($_ENV['DB_PASS'] ?? 'VRFTQruB06eyClbA'));
         $name = getenv('DB_NAME') ?: getenv('database.default.database') ?: ($_ENV['database.default.database'] ?? ($_ENV['DB_NAME'] ?? 'test'));
         $port = getenv('DB_PORT') ?: getenv('database.default.port') ?: ($_ENV['database.default.port'] ?? ($_ENV['DB_PORT'] ?? 4000));
 
